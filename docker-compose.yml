@@ -1,0 +1,60 @@
+version: '3'
+services:
+
+  #PHP Service
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    container_name: app_pickpay
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+      - ./docker/php.ini:/usr/local/etc/php/conf.d/local.ini
+
+  #Nginx Service
+  webserver:
+    image: nginx:alpine
+    container_name: webserver_picpay
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/:/etc/nginx/conf.d/
+
+  #MySQL Service
+  db:
+    image: mysql:5.7.22
+    container_name: db_picpay
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: picpay
+      MYSQL_ROOT_PASSWORD: 123abc456
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - dbdata:/var/lib/mysql/
+
+  phpmyadmin:
+    container_name: phpmyadmin_picpay
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - 8050:80          
+    environment:
+      PMA_PORT: 3306
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: 123abc456
+      UPLOAD_LIMIT: 8192000
+
+#Volumes
+volumes:
+  dbdata:
+    driver: local
