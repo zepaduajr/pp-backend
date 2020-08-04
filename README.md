@@ -3,6 +3,10 @@
 
 A implementação visa resolver o desafio levando os requisitos informados como consideração.
 
+## Modelo
+
+![alt text](https://github.com/zepaduajr/pp-backend/blob/master/modelo.png?raw=true)
+
 ## Para executar o projeto
 
 Após baixar o projeto, siga os comandos abaixo:
