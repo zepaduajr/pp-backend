@@ -8,17 +8,17 @@ A implementação visa resolver o desafio levando os requisitos informados como 
 Após baixar o projeto, siga os comandos abaixo:
 
 ```
-composer install
-cp .env.example .env
-php artisan key:generate
 docker-compose up -d
-php artisan migrate --seed
+cp .env.example .env
+docker-compose exec app composer install
+docker-compose exec app php artisan key:generate
+docker-compose exec app php artisan migrate:refresh --seed
 ```
 
 ## Testes
 
 ```
-vendor/bin/phpunit
+docker-compose exec app vendor/bin/phpunit
 ```
 
 ## Endpoint
@@ -27,4 +27,9 @@ vendor/bin/phpunit
 (post) http://localhost/api/transaction
 ```
 
-## Swagger
+## Melhorias de arquitetura
+
+1. Utilização de cache (Redis) para agilizar a consulta de saldos
+2. Utilização de serviço de mensageria (RabbitMQ, por exemplo) para as transações
+3. Modelagem de uma carteira para armazenar métodos de pagamento
+4. Log de todas as interações
