@@ -1,0 +1,23 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "PP Backend",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/transaction": {
+            "post": {
+                "description": "Return a Course´s name",
+                "operationId": "App\\Http\\Controllers\\TransactionController::store",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "422": {
+                        "description": "Missing Data"
+                    }
+                }
+            }
+        }
+    }
+}

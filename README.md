@@ -3,10 +3,6 @@
 
 A implementação visa resolver o desafio levando os requisitos informados como consideração.
 
-## Modelo
-
-![alt text](https://github.com/zepaduajr/pp-backend/blob/master/modelo.png?raw=true)
-
 ## Para executar o projeto
 
 Após baixar o projeto, siga os comandos abaixo:
@@ -31,9 +27,23 @@ docker-compose exec app vendor/bin/phpunit
 (post) http://localhost/api/transaction
 ```
 
+## Swagger
+
+Após rodar o projeto, acessar o endereço:
+
+```
+http://localhost/swagger
+```
+
 ## Melhorias de arquitetura
 
 1. Utilização de cache (Redis) para agilizar a consulta de saldos
 2. Utilização de serviço de mensageria (RabbitMQ, por exemplo) para as transações
 3. Modelagem de uma carteira para armazenar métodos de pagamento
 4. Log de todas as interações
+
+## Modelo
+
+Modelo de dados básico necessário para resolução da arquitetura proposta
+
+![alt text](https://github.com/zepaduajr/pp-backend/blob/master/modelo.png?raw=true)

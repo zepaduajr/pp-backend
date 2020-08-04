@@ -41,7 +41,7 @@ class SendTransactionService
             $request = $this->requestMockyUrlService->execute(env('URL_AUTORIZACAO'))->getOriginalContent();
             if($request['status'] != 200 || $request['details'] !== 'Autorizado') {
                 DB::rollBack();
-                return MsgResource::make('Authorization error', 400, 'Not Authorized.');
+                return MsgResource::make('Authorization error', 401, 'Not Authorized.');
             }
 
             $payee = $this->userRepository->findById($data['payee']);

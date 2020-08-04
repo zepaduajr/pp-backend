@@ -1,0 +1,64 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "PP Backend",
+        "description": "Desafio PP Backend",
+        "contact": {
+            "name": "Jose Guilherme Padua Jr.",
+            "email": "zepaduajr@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/transaction": {
+            "post": {
+                "description": "Transfer transaction between users or user and company.",
+                "operationId": "App\\Http\\Controllers\\TransactionController::store",
+                "parameters": [
+                    {
+                        "name": "value",
+                        "in": "query",
+                        "description": "Value to transfer. Must be greater than 0.",
+                        "required": true,
+                        "schema": {
+                            "type": "number",
+                            "format": "float"
+                        }
+                    },
+                    {
+                        "name": "payer",
+                        "in": "query",
+                        "description": "User (1 - 10)",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "payee",
+                        "in": "query",
+                        "description": "User or Company (1 - 20)",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful transaction"
+                    },
+                    "400": {
+                        "description": "Business validations"
+                    },
+                    "401": {
+                        "description": "Transaction Unauthorized"
+                    },
+                    "422": {
+                        "description": "Structural validations"
+                    }
+                }
+            }
+        }
+    }
+}
